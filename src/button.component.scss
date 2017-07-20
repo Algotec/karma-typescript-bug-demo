@@ -1,0 +1,307 @@
+@import "~@algotec/themes/generals/variables";
+@import "~@algotec/themes/generals/mixins";
+@import "~@algotec/themes/themes";
+
+/* VARIABLES */
+
+// Notice: the look-n-feel of specific buttons is according to design of larger host components (like Ribbon, Menu) and the button styles are defined as part of styles of such larger components
+// this stylesheet therefore contains minimum core styles - mainly structural but also some colors to make a stand-alone button visible.
+// No need in themes support still themify_prop mixing is used here and most styles are not within :host block because otherwise overriding button styles will be more difficult
+
+// TODO: remove the following color variables and use colors from themes
+$buttonComponentRegularBgColor: #23263E;
+$buttonComponentDropdownArrowRegularColor: #FFFFFF;
+
+
+/* CLASSES */
+
+:host {
+  display: inline-block;
+  height: 100%;
+  font-size: $componentContainerFontSize;
+}
+
+.buttonElement {
+  position: relative;
+  top: 0;
+  left: 0;
+  height: 100%;
+  display: flex;
+  justify-content: flex-start;
+  flex-flow: row nowrap;
+  align-items: center;
+  cursor: pointer;
+
+  @include themify_prop( background, $buttonComponentRegularBgColor);
+  user-select:none;
+
+  &[disabled='true'] { /* disabled */
+    cursor: default;
+  }
+
+  &.emphasize {
+    .buttonElementText {
+      font-weight: bold;
+    }
+  }
+
+  .buttonElementIcon {
+    line-height: 0; /* There is no text. It is necessary to fix vertical position. */
+  }
+
+  /* Text part */
+
+  .buttonElementText { /* if has text + icon */
+    padding-left: 0.5em;
+  }
+
+  .buttonElementText:first-child { /* only text, no icon */
+    text-align: left;
+    padding-left: 0;
+    padding-right: 0;
+    width: 100%;
+  }
+
+  .buttonElementText {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-weight: normal;
+    font-family: $generalFontFamily;
+  }
+
+  /* Icon Part */
+
+  .buttonElementBGIcon{
+    width: 3.2em;
+    height: 3.2em;
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    background-size: 100%;
+  }
+
+  /* Host of alg-icon-container component */
+  .algIconHost{
+    font-size: 1.6em;
+  }
+
+  /deep/ alg-icon-container {
+    display: inline-flex;
+    width: 2em; // NOTICE - width and height must be equal to values passed to input params of alg-icon-container - see  alg-button-container and alg-button components
+    height: 2em;
+  }
+
+  /* Arrow of Dropdown type */
+
+  .buttonElementDropDownArrow{
+    position: absolute;
+    right: -2em;
+    top: 0.9em;
+    padding: 0.7em 0.5em;
+
+    &::after{
+      display: block;
+      content: "";
+      width: 0;
+      height: 0;
+      border-top: 0.7em solid transparent;
+      @include themify_prop( border-top-color, $buttonComponentRegularBgColor);
+      border-left: 0.5em solid transparent;
+      border-right: 0.5em solid transparent;
+    }
+  }
+}
+
+/***************************************************************************
+Important Note:
+Any default class added below, have to be listed in the classes array list
+in function clearDefaultCssClasses in ButtonComponent component
+in file (button.component.ts).
+***************************************************************************/
+
+/**************************/
+/** REGULAR BUTTON STYLE **/
+/**************************/
+
+.regularButton {
+  box-sizing: border-box;
+  border: 1px solid;
+  border-radius: 0.39em;
+  padding: 0 1.3em;
+  min-height: 3.25em;
+
+  .buttonElementText {
+    font-size: 1.82em;
+  }
+
+  // normal
+  &:not(.pressed):not(.checked):not([disabled='true']) {
+    @include themify_prop('border-color', button-border-color-1-normal);
+    @include themify_prop('background', button-bgc-7-normal);
+    .buttonElementText {
+      @include themify_prop('color', button-text-color-3-normal);
+    }
+  }
+
+  // hover
+  &:not(.pressed):not(.checked):not([disabled='true']):hover  {
+    @include themify_prop('border-color', button-border-color-1-hover);
+    @include themify_prop('background', button-bgc-7-hover);
+    .buttonElementText {
+      @include themify_prop('color', button-text-color-3-hover);
+    }
+  }
+
+  // pressed
+  &.pressed:not([disabled='true']) {
+    @include themify_prop('border-color', button-border-color-1-pressed);
+    @include themify_prop('background', button-bgc-7-pressed);
+    .buttonElementText {
+      @include themify_prop('color', button-text-color-3-pressed);
+    }
+  }
+
+  // disabled
+  &[disabled='true'] {
+    @include themify_prop('border-color', button-border-color-1-disabled);
+    @include themify_prop('background', button-bgc-7-disabled);
+    .buttonElementText {
+      @include themify_prop('color', button-text-color-3-disabled);
+    }
+  }
+}
+
+/************************/
+/** REGULAR LINK STYLE **/
+/************************/
+
+.regularLinkButton {
+  box-sizing: border-box;
+  border: 1px solid transparent;
+  padding: 0;
+  min-height: 3.25em;
+
+  .buttonElementText {
+    font-size: 1.82em;
+  }
+
+  // normal
+  &:not(.pressed):not(.checked):not([disabled='true']) .buttonElementText {
+    @include themify_prop('color', link-color-5-normal);
+  }
+
+  // hover
+  &:not(.pressed):not(.checked):not([disabled='true']):hover .buttonElementText {
+    @include themify_prop('color', link-color-5-hover);
+  }
+
+  // pressed
+  &.pressed:not([disabled='true']) .buttonElementText {
+    @include themify_prop('color', link-color-5-selected);
+  }
+
+  // disabled
+  &[disabled='true'] .buttonElementText {
+    @include themify_prop('color', link-color-5-disabled);
+  }
+}
+
+/****************88888********/
+/** REGULAR ICON LINK STYLE **/
+/*********************88888***/
+
+.regularIconLinkButton {
+  box-sizing: border-box;
+  border: 1px solid transparent;
+  padding: 0;
+  min-height: 3.25em;
+
+  .buttonElementText {
+    font-size: 1.82em;
+  }
+
+  /deep/ .algIconHost {
+    font-size: 1.04em !important;
+    line-height: 0;
+
+    @include themify_svgIconColor(
+      icon-color-normal-7,
+      icon-color-hover-7,
+      icon-color-pressed-7,
+      icon-color-selected-7,
+      icon-color-disabled-7
+    );
+  }
+
+  // normal
+  &:not(.pressed):not(.checked):not([disabled='true']) .buttonElementText {
+    @include themify_prop('color', link-color-1-normal);
+  }
+
+  // hover
+  &:not(.pressed):not(.checked):not([disabled='true']):hover .buttonElementText {
+    @include themify_prop('color', link-color-1-hover);
+  }
+
+  // pressed
+  &.pressed:not([disabled='true']) .buttonElementText {
+    @include themify_prop('color', link-color-1-selected);
+  }
+
+  // disabled
+  &[disabled='true'] .buttonElementText {
+    @include themify_prop('color', link-color-1-disabled);
+  }
+}
+
+/****************888888*********/
+/** REGULAR Form BUTTON STYLE **/
+/*******************************/
+
+.regularFormButton {
+  box-sizing: border-box;
+  border: 1px solid;
+  border-radius: 0.39em;
+  padding: 0 1.3em;
+  min-height: 3.25em;
+
+  .buttonElementText {
+    font-size: 1.82em;
+  }
+
+  // normal
+  &:not(.pressed):not(.checked):not([disabled='true']) {
+    @include themify_prop('border-color', button-border-color-3-normal);
+    @include themify_prop('background', button-bgc-10-normal);
+    .buttonElementText {
+      @include themify_prop('color', button-text-color-5-normal);
+    }
+  }
+
+  // hover
+  &:not(.pressed):not(.checked):not([disabled='true']):hover  {
+    @include themify_prop('border-color', button-border-color-3-hover);
+    @include themify_prop('background', button-bgc-10-hover);
+    .buttonElementText {
+      @include themify_prop('color', button-text-color-5-hover);
+    }
+  }
+
+  // pressed
+  &.pressed:not([disabled='true']) {
+    @include themify_prop('border-color', button-border-color-3-pressed);
+    @include themify_prop('background', button-bgc-10-pressed);
+    .buttonElementText {
+      @include themify_prop('color', button-text-color-5-pressed);
+    }
+  }
+
+  // disabled
+  &[disabled='true'] {
+    @include themify_prop('border-color', button-border-color-3-disabled);
+    @include themify_prop('background', button-bgc-10-disabled);
+    .buttonElementText {
+      @include themify_prop('color', button-text-color-5-disabled);
+    }
+  }
+}

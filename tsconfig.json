@@ -1,0 +1,44 @@
+{
+	"compilerOptions": {
+		"target": "es5",
+		"module": "es2015",
+		"moduleResolution": "node",
+		"skipLibCheck": true,
+		"emitDecoratorMetadata": true,
+		"downlevelIteration":true,
+		"importHelpers": true,
+		"experimentalDecorators": true,
+		"allowSyntheticDefaultImports": true,
+		"sourceMap": true,
+		"noEmit": false,
+		"declaration": true,
+		"outDir": "dist",
+		"noEmitHelpers": true,
+		"strictNullChecks": false,
+		"lib": [
+			"dom",
+			"es6",
+			"scripthost",
+			"es2015",
+			"es2016",
+			"es2017"
+		],
+		"typeRoots": [
+			"node_modules/@types"
+		]
+	},
+	"exclude": [
+		"base.spec.ts",
+		"node_modules",
+		"dist"
+	],
+	"awesomeTypescriptLoaderOptions": {
+		"forkChecker": true,
+		"useWebpackText": true
+	},
+	"compileOnSave": false,
+	"buildOnSave": false,
+	"atom": {
+		"rewriteTsconfig": false
+	}
+}

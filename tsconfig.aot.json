@@ -1,0 +1,80 @@
+{
+	"compilerOptions": {
+		"target": "es5",
+		"module": "es2015",
+		"moduleResolution": "node",
+		"skipLibCheck": true,
+		"downlevelIteration":true,
+		"emitDecoratorMetadata": true,
+		"importHelpers": true,
+		"experimentalDecorators": true,
+		"allowSyntheticDefaultImports": true,
+		"sourceMap": true,
+		"inlineSources":true,
+		"noEmit": false,
+		"declaration": true,
+		"noEmitHelpers": true,
+		"strictNullChecks": false,
+		"baseUrl": "./",
+		"lib": [
+			"dom",
+			"es6",
+			"scripthost",
+			"es2015",
+			"es2016",
+			"es2017"
+		],
+		"paths": {
+			"@angular/common": [
+				"../node_modules/@angular/common"
+			],
+			"@angular/compiler": [
+				"../node_modules/@angular/compiler"
+			],
+			"@angular/core": [
+				"../node_modules/@angular/core"
+			],
+			"@angular/forms": [
+				"../node_modules/@angular/forms"
+			],
+			"@angular/platform-browser": [
+				"../node_modules/@angular/platform-browser"
+			],
+			"@angular/platform-browser-dynamic": [
+				"../node_modules/@angular/platform-browser-dynamic"
+			],
+			"@angular/router": [
+				"../node_modules/@angular/router"
+			],
+			"@angular/http": [
+				"../node_modules/@angular/http"
+			]
+		},
+		"typeRoots": [
+			"./node_modules/@types"
+		],
+		"outDir": "./dist",
+		"rootDir": "./inlined"
+	},
+	"exclude": [
+		"src",
+		"base.spec.ts",
+		"node_modules",
+		"dist"
+
+	],
+	"awesomeTypescriptLoaderOptions": {
+		"forkChecker": true,
+		"useWebpackText": true
+	},
+	"compileOnSave": false,
+	"buildOnSave": false,
+	"atom": {
+		"rewriteTsconfig": false
+	},
+	"angularCompilerOptions": {
+		"debug": true,
+		"skipMetadataEmit": false,
+		"skipTemplateCodegen": true
+	}
+}
