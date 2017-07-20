@@ -1,37 +1,43 @@
-# UI-Elements-Webkit
-a set of UI components for Algotec products using Angular platform 
+# karma typescript transform debugging demo
 
-## SVG ICONS
-all components use alg-icon component to display icons, this references svg symbols that should already be on the page
-when the component mounts, to get the svg icons needed for this package's components loaded one must add the svg sprite to the page by either
- 1. by including the build generated icons.svg sprite in the html (manually or using XHR)
- 2. utilizing [svgstore-webpack-plugin](https://github.com/mrsum/webpack-svgstore-plugin) in webpack config 
- and globbing this package src folder for svg assets
- 
- the loading function should look like this
- ````javascript
- (function uiPackAppSVG() {
- 	let __svg__ = { pat**h: '../node_modules/@algotec/ui-elements-webkit/src/**/*.svg', name: 'assets/icon/[hash].ui-icons.svg' };
- 	require('webpack-svgstore-plugin/src/helpers/svgxhr')(__svg__);
- })();
- ````
- 
- the configuration for svgStore plugin looks like this :
- ````javascript
- ///plugin
- new SvgStore({
- 			svgoOptions: { // svgo options https://github.com/svg/svgo
- 				plugins: [
- 					{removeStyleElement: true},
- 					{collapseGroups: true},
- 					{cleanupIDs: true},
- 					{removeDimensions: true}
- 				]
- 			},
- 			prefix: 'icon'
- 		}),
-````
+# before running make sure to both install regular and peer dependencies
 
-notice that the generated ID will be 'icon-'+filename where filename is case-insensitive and all dots converted to dashes
-eg :
-something.Weird.svg --> #icon-something-weird
+```
+yarn
+npm run peers /// installs peer dependecies
+```
+
+to run tests in continues mode use
+```
+npm run tdd
+```
+
+error in console
+```
+karma-typescript-bundle-274043GcLMI7EwEmI.js:70497 Uncaught TypeError: (0 , _defineProperty2.default) is not a function
+    at baseSetToString (karma-typescript-bundle-274043GcLMI7EwEmI.js:70497)
+    at karma-typescript-bundle-274043GcLMI7EwEmI.js:7070
+    at baseRest (karma-typescript-bundle-274043GcLMI7EwEmI.js:70564)
+    at Object.global.wrappers.C:/Data/karma-typescript-bug-demo/node_modules/lodash-es/difference.js../_baseFlatten.js (karma-typescript-bundle-274043GcLMI7EwEmI.js:70614)
+    at require (commonjs.js:17)
+    at commonjs.js:18
+    at Object.global.wrappers.C:/Data/karma-typescript-bug-demo/src/button.component.ts.tslib (button.component.js:24)
+    at require (commonjs.js:17)
+    at commonjs.js:18
+    at Object.global.wrappers.C:/Data/karma-typescript-bug-demo/src/button.component.spec.ts.tslib (button.component.spec.js:5)
+baseSetToString @ karma-typescript-bundle-274043GcLMI7EwEmI.js:70497
+(anonymous) @ karma-typescript-bundle-274043GcLMI7EwEmI.js:7070
+baseRest @ karma-typescript-bundle-274043GcLMI7EwEmI.js:70564
+global.wrappers.C:/Data/karma-typescript-bug-demo/node_modules/lodash-es/difference.js../_baseFlatten.js @ karma-typescript-bundle-274043GcLMI7EwEmI.js:70614
+require @ commonjs.js:17
+(anonymous) @ commonjs.js:18
+global.wrappers.C:/Data/karma-typescript-bug-demo/src/button.component.ts.tslib @ button.component.js:24
+require @ commonjs.js:17
+(anonymous) @ commonjs.js:18
+global.wrappers.C:/Data/karma-typescript-bug-demo/src/button.component.spec.ts.tslib @ button.component.spec.js:5
+require @ commonjs.js:17
+(anonymous) @ commonjs.js:32
+(anonymous) @ commonjs.js:31
+(anonymous) @ commonjs.js:34
+debug.js:6 Skipped 0 tests 
+```
